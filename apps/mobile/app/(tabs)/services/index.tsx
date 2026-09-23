@@ -1,0 +1,1 @@
+import React from "react"; import {ScreenPlaceholder} from "@/components/ScreenPlaceholder"; export default function ServicesScreen(){return <ScreenPlaceholder title="Services" description="Auction sheet analysis (Phase 4), import calculator and guides (Phase 5), and Ask Motoraconect AI (Phase 6) will live here."/>}
