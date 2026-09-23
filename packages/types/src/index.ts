@@ -8,4 +8,5 @@ export interface VehicleFilters { q?: string; make?: string; model?: string; cit
 export type Vehicle = import("./database").Database["public"]["Tables"]["vehicles"]["Row"];
 export type VehicleImage = import("./database").Database["public"]["Tables"]["vehicle_images"]["Row"];
 export type { Database } from "./database";\nexport * from "./auction";
-export * from "./import";\n
+export * from "./import";
+export * from "./chat";\n
