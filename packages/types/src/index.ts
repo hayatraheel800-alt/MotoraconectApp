@@ -9,4 +9,5 @@ export type Vehicle = import("./database").Database["public"]["Tables"]["vehicle
 export type VehicleImage = import("./database").Database["public"]["Tables"]["vehicle_images"]["Row"];
 export type { Database } from "./database";\nexport * from "./auction";
 export * from "./import";
-export * from "./chat";\n
+export * from "./chat";
+export * from "./consultation";\n
