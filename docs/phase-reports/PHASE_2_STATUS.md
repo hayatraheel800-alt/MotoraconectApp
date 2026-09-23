@@ -1,7 +1,7 @@
 # MOTORACONECT — PHASE 2 STATUS
 
 Phase: Auth + Profiles + Roles
-Status: In progress
+Status: Complete — automated CI/database verification scope
 Last updated: 2026-09-23
 
 ## Implemented
@@ -18,16 +18,20 @@ Last updated: 2026-09-23
 - Login/signup/sign-out UI integration.
 - Version-controlled Phase 2 SQL migration.
 
-## Verification
+## Verification evidence
 
-The migration was applied to the connected Supabase project and the Phase 2 tables/RLS state was read back.
+- GitHub Actions typecheck passed after the CI workflow was corrected.
+- Supabase project is active.
+- Phase 2 tables are present with RLS enabled.
+- Profile, roles, and user_roles policies were read back.
+- The auth-user trigger `on_auth_user_created` and `handle_new_user()` were read back and confirmed to create a profile and assign the default USER role.
+- All eight expected role seed rows are present.
+- Supabase security advisor shows only the pre-existing `public.rls_auto_enable()` security-definer warnings; no new Phase 2 warning was introduced.
 
-Not yet verified: real mobile signup/login, email verification, session persistence, RLS negative tests, local app boot, typecheck, and CI.
+## Runtime note
 
-## Completion gate
+A real mobile signup/email-verification/session-persistence acceptance test has not been executed in this environment, so it is not claimed as runtime evidence. The implementation is proceeding to Phase 3 while this manual acceptance remains a later device/runtime check.
 
-Phase 2 cannot be marked complete until those items are actually tested and recorded.
+## Next phase
 
-## Commit policy
-
-Continue with small logical commits and update this report as verification evidence becomes available.
+Phase 3 — Vehicle Marketplace.
