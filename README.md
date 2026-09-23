@@ -11,7 +11,7 @@ Motoraconect is an international automotive platform planned around vehicle mark
 - Phase 0 architecture is preserved in `docs/architecture/MOTORACONECT_PHASE0_ARCHITECTURE.md`.
 - Phase 1 foundation is in the repository.
 - Phase 2 identity, profiles, roles, RLS, and mobile auth integration are implemented and its CI/database verification scope is complete.
-- Phase 3 now has the vehicle schema, ownership RLS, private image storage, shared API layer, search foundation, listing/detail screens, and create/edit draft flow.
+- Phase 3 now has the vehicle schema, ownership RLS, private image storage, shared API layer, search foundation, listing/detail screens, create/edit draft flow, and the initial Supabase Auth Google OAuth flow.
 - Runtime/device acceptance and the remaining marketplace workflow are still required before Phase 3 is marked complete.
 - Work is committed incrementally after meaningful changes.
 
@@ -25,6 +25,7 @@ Motoraconect is an international automotive platform planned around vehicle mark
 | Mobile | Expo + React Native + TypeScript + Expo Router |
 | Database | Supabase Postgres + RLS |
 | Web/Admin | Planned for later phases |
+| Authentication | Supabase Auth + Google Sign-In |
 
 ## Repository structure
 
