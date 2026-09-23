@@ -53,7 +53,10 @@ using (exists(select 1 from public.dealers d where d.id=dealer_id and d.status='
 drop policy if exists "Owners can manage dealer inventory" on public.dealer_inventory;
 create policy "Owners can manage dealer inventory"
 on public.dealer_inventory for insert to authenticated
-with check (exists(select 1 from public.dealers d where d.id=dealer_id and d.owner_id=(select auth.uid())));
+with check (
+  exists(select 1 from public.dealers d where d.id=dealer_id and d.owner_id=(select auth.uid()))
+  and exists(select 1 from public.vehicles v where v.id=vehicle_id and v.seller_id=(select auth.uid()))
+);
 
 drop policy if exists "Owners can delete dealer inventory" on public.dealer_inventory;
 create policy "Owners can delete dealer inventory"
