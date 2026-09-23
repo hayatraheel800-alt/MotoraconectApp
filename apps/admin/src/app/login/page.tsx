@@ -4,10 +4,12 @@ import {FormEvent,useState} from "react";
 import {createBrowserClient} from "@supabase/ssr";
 import {useRouter} from "next/navigation";
 
-const client=createBrowserClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
-);
+function getClient(){
+  const url=process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key=process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+  if(!url||!key) throw new Error("Supabase environment variables are not configured.");
+  return createBrowserClient(url,key);
+}
 
 export default function LoginPage(){
   const router=useRouter();
@@ -17,7 +19,7 @@ export default function LoginPage(){
   const [busy,setBusy]=useState(false);
   async function submit(e:FormEvent){
     e.preventDefault();setBusy(true);setError(null);
-    const {error}=await client.auth.signInWithPassword({email,password});
+    const {error}=await getClient().auth.signInWithPassword({email,password});
     if(error){setError(error.message);setBusy(false);return}
     router.replace("/");
     router.refresh();
