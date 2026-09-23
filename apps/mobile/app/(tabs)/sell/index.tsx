@@ -1,0 +1,1 @@
+import React from "react"; import {ScreenPlaceholder} from "@/components/ScreenPlaceholder"; export default function SellScreen(){return <ScreenPlaceholder title="Sell a vehicle" description="The guided listing flow (vehicle info, specs, photos, review, submit) is built in Phase 3."/>}
