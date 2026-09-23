@@ -11,28 +11,22 @@ This is the living implementation snapshot. For the original planned architectur
 - Expo Router navigation shell.
 - Supabase client wiring with secure mobile session storage.
 - Supabase project: kaxkzmrlaavgweqsfman.
-- Phase 2 identity tables: profiles, roles, user_roles.
-- RLS enabled on Phase 2 identity tables.
-- Signup trigger creates profile and default USER role.
+- Phase 2 identity tables and RLS.
 - Mobile signup/login/sign-out integration.
 - Phase 3 vehicle and vehicle_images tables with RLS.
 - Phase 3 private vehicle-images Storage bucket and policies.
 - Generated Supabase database types.
 - packages/api shared vehicle service layer.
-- Mobile vehicle listing, detail, create-draft, and edit-draft flows.
-- Vehicle full-text search and structured database indexes.
+- Mobile vehicle listing, detail, create/edit draft, guided listing, filters, My Listings, seller draft management, submit-for-review, photo upload, and signed-image flows.
+- Authenticated RLS fixture test source.
 
-## Not yet implemented
+## Pending verification
 
-- Vehicle photo picker/upload UI and signed-image presentation.
-- Seller "My Listings" management and moderation handoff.
-- Web app.
-- Admin app.
-- AI providers/real AI calls.
-- Payments.
-- Messaging/notifications.
+- Full pgTAP execution in the project test environment.
+- Real Expo emulator/device runtime verification.
+- Production Google OAuth URL/deep-link configuration.
+- Web app and admin app.
 - Production deployment topology.
-- Full automated runtime/RLS fixture suite.
 
 ## Invariants
 
@@ -43,7 +37,3 @@ This is the living implementation snapshot. For the original planned architectur
 - User roles are separate from profile data.
 - Database migrations are version-controlled.
 - Private Storage is the default for user-uploaded marketplace media.
-
-## Key terminology
-
-The Phase 0 source refers to the legacy Supabase anon client key. Current Supabase documentation is moving toward publishable keys for client applications and secret keys for server-side use. Follow the current Supabase project configuration when the environment is finalized; never place a secret key in the mobile app.
