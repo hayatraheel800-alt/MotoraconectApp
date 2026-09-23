@@ -7,4 +7,4 @@ export interface ServiceError { code: string; message: string; userMessage: stri
 export interface VehicleFilters { q?: string; make?: string; model?: string; city?: string; minPrice?: number; maxPrice?: number; minYear?: number; maxYear?: number; status?: VehicleStatus; limit?: number; offset?: number; }
 export type Vehicle = import("./database").Database["public"]["Tables"]["vehicles"]["Row"];
 export type VehicleImage = import("./database").Database["public"]["Tables"]["vehicle_images"]["Row"];
-export type { Database } from "./database";
+export type { Database } from "./database";\nexport * from "./auction";\n
