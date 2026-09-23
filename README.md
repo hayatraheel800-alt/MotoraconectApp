@@ -6,13 +6,13 @@ Motoraconect is an international automotive platform planned around vehicle mark
 
 ## Current status
 
-**Phase 3 — Vehicle Marketplace: IN PROGRESS**
+**Phase 3 — Vehicle Marketplace: FINAL VERIFICATION IN PROGRESS**
 
 - Phase 0 architecture is preserved in `docs/architecture/MOTORACONECT_PHASE0_ARCHITECTURE.md`.
 - Phase 1 foundation is in the repository.
 - Phase 2 identity, profiles, roles, RLS, and mobile auth integration are implemented and its CI/database verification scope is complete.
-- Phase 3 now has the vehicle schema, ownership RLS, private image storage, shared API layer, search foundation, listing/detail screens, create/edit draft flow, and the initial Supabase Auth Google OAuth flow.
-- Runtime/device acceptance and the remaining marketplace workflow are still required before Phase 3 is marked complete.
+- Phase 3 now has the vehicle schema, ownership RLS, private image storage, shared API layer, search/filter flows, guided listing, My Listings, seller management, submit-for-review, photo upload, signed images, and the initial Supabase Auth Google OAuth flow.
+- Full pgTAP execution and real emulator/device acceptance are still required before Phase 3 is marked complete.
 - Work is committed incrementally after meaningful changes.
 
 ## Project infrastructure
