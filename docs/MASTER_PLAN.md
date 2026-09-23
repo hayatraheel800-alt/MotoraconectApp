@@ -4,9 +4,9 @@ Last updated: 2026-09-23
 
 ## Current phase
 
-**Phase 10 — Dealers**
+**Phase 13 — Internationalization**
 
-Phase 4, Phase 5, Phase 6, Phase 7, Phase 8, Phase 9, Phase 11, and Phase 12 implementations are complete. Phase 10 implementation is now in progress. Comprehensive testing and acceptance verification remain intentionally deferred until the final verification/hardening phase.
+Phase 4, Phase 5, Phase 6, Phase 7, Phase 8, Phase 9, Phase 10, Phase 11, Phase 12, and Phase 13 implementations are complete. Phase 14 final verification/hardening is now in progress. Comprehensive testing and acceptance verification remain intentionally deferred until the final verification/hardening phase.
 
 ## Priority execution order
 
@@ -49,7 +49,7 @@ The phases remain numbered for architecture/history, but implementation follows 
 10. Phase 10 — Dealers **(current)**
 11. Phase 11 — Payments
 12. Phase 12 — Admin and analytics
-13. Phase 13 — Internationalization
+13. Phase 13 — Internationalization **(implemented)**
 14. Phase 14 — Hardening, security, performance, compliance, and full verification
 15. Phase 15 — Production launch
 
@@ -73,4 +73,5 @@ Each phase should have implementation, database/schema changes where needed, doc
 - Phase 9: `docs/phase-reports/PHASE_9_PLAN.md`
 - Phase 11: `docs/phase-reports/PHASE_11_PLAN.md`
 - Phase 12: `docs/phase-reports/PHASE_12_PLAN.md`
-- Phase 10 work: `docs/phase-reports/PHASE_10_PLAN.md`
+- Phase 13: `docs/phase-reports/PHASE_13_PLAN.md`
+- Phase 10: `docs/phase-reports/PHASE_10_PLAN.md`
