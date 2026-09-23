@@ -11,15 +11,16 @@ export default function AuctionSheetScreen(){
   async function pickSheet(){
     const permission=await ImagePicker.requestMediaLibraryPermissionsAsync();
     if(!permission.granted){Alert.alert("Permission needed","Allow photo access to upload an auction sheet.");return;}
-    const result=await ImagePicker.launchImageLibraryAsync({mediaTypes:["images"],quality:1,base64:true});
+    const result=await ImagePicker.launchImageLibraryAsync({mediaTypes:ImagePicker.MediaTypeOptions.Images,quality:1,base64:true});
     if(result.canceled||!result.assets[0]?.base64) return;
     const asset=result.assets[0];
+    const base64=asset.base64;
     setBusy(true);
     try{
       const report=await createAuctionReport({
         documentName:asset.fileName??"auction-sheet.jpg",
         mimeType:asset.mimeType??"image/jpeg",
-        base64:asset.base64
+        base64
       });
       if(report) router.push(`/(tabs)/services/auction-sheet/${report.id}`);
     }catch(error){
