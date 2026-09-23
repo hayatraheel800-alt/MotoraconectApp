@@ -19,6 +19,7 @@ export default function DealersScreen(){
     <Text style={styles.title}>Dealers</Text>
     <Text style={styles.body}>Browse approved dealer profiles. Dealer status is reviewed separately from vehicle listing status.</Text>
     <Button title="Register as a dealer" onPress={()=>router.push("/(tabs)/services/dealers/new")}/>
+    <Button title="Manage my dealer" onPress={()=>router.push("/(tabs)/services/dealers/my")}/>
     {!dealers.length?<Text style={styles.empty}>No active dealers yet.</Text>:dealers.map(dealer=><View key={dealer.id} style={styles.card}>
       <Text style={styles.name}>{dealer.business_name}</Text>
       <Text>{dealer.city?dealer.city+" • ":""}{dealer.country_code}</Text>
