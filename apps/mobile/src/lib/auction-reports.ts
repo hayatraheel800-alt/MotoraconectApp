@@ -7,6 +7,13 @@ const analyzer=new MockAuctionSheetAnalyzer();
 
 type CreateAuctionReportInput={documentName:string; mimeType:string; base64:string; vehicleId?:string|null};
 
+async function markFailed(reportId:string,errorMessage:string){
+  await supabase.from("auction_reports").update({
+    status:"FAILED",
+    error_message:errorMessage,
+  }).eq("id",reportId);
+}
+
 export async function createAuctionReport(input:CreateAuctionReportInput){
   const {data:{user}}=await supabase.auth.getUser();
   if(!user) throw new Error("AUTH_REQUIRED");
@@ -28,21 +35,31 @@ export async function createAuctionReport(input:CreateAuctionReportInput){
     throw new Error(insertError.message);
   }
 
-  await supabase.from("auction_reports").update({status:"ANALYZING"}).eq("id",reportId);
+  const {error:analysisStatusError}=await supabase.from("auction_reports").update({status:"ANALYZING"}).eq("id",reportId);
+  if(analysisStatusError){
+    await markFailed(reportId,analysisStatusError.message);
+    throw new Error(analysisStatusError.message);
+  }
 
-  const result=await analyzer.analyze({documentName:input.documentName,storagePath:path});
-  const {error:readyError}=await supabase.from("auction_reports").update({
-    status:"READY",summary:result.summary,result,error_message:null
-  }).eq("id",reportId);
-  if(readyError) throw new Error(readyError.message);
+  try{
+    const result=await analyzer.analyze({documentName:input.documentName,storagePath:path});
+    const {error:readyError}=await supabase.from("auction_reports").update({
+      status:"READY",summary:result.summary,result,error_message:null
+    }).eq("id",reportId);
+    if(readyError) throw readyError;
 
-  if(result.items.length){
-    const rows=result.items.map(item=>({
-      report_id:reportId,field_name:item.field,value_text:item.value===null?null:String(item.value),
-      source:item.source,confidence:item.confidence,note:item.note??null
-    }));
-    const {error:itemError}=await supabase.from("auction_report_items").insert(rows);
-    if(itemError) throw new Error(itemError.message);
+    if(result.items.length){
+      const rows=result.items.map(item=>({
+        report_id:reportId,field_name:item.field,value_text:item.value===null?null:String(item.value),
+        source:item.source,confidence:item.confidence,note:item.note??null
+      }));
+      const {error:itemError}=await supabase.from("auction_report_items").insert(rows);
+      if(itemError) throw itemError;
+    }
+  }catch(error){
+    const message=error instanceof Error?error.message:"Unable to analyze auction sheet";
+    await markFailed(reportId,message);
+    throw new Error(message);
   }
 
   return getAuctionReport(reportId);
