@@ -4,9 +4,9 @@ Last updated: 2026-09-23
 
 ## Current phase
 
-**Phase 8 — Consultation**
+**Phase 12 — Admin & Analytics**
 
-Phase 4, Phase 5, and Phase 7 implementations are complete. Phase 8 implementation is now in progress. Comprehensive testing and acceptance verification remain intentionally deferred until the final verification/hardening phase.
+Phase 4, Phase 5, Phase 7, and Phase 8 implementations are complete. Phase 12 implementation is now in progress. Comprehensive testing and acceptance verification remain intentionally deferred until the final verification/hardening phase.
 
 ## Priority execution order
 
@@ -63,11 +63,12 @@ Comprehensive automated tests, runtime verification, cross-platform checks, depl
 
 Each phase should have implementation, database/schema changes where needed, documentation, and Git commits. A phase is considered implementation-complete before moving to the next one; full-system verification happens at the end.
 
-6. Phase 7 — Messaging and notifications **(current)**
+6. Phase 7 — Messaging and notifications **(implemented)**
 
 ## Phase references
 
 - Phase 4: `docs/phase-reports/PHASE_4_PLAN.md`
 - Phase 5: `docs/phase-reports/PHASE_5_PLAN.md`
 - Phase 7: `docs/phase-reports/PHASE_7_PLAN.md`
-- Phase 8 work will be documented in `docs/phase-reports/PHASE_8_PLAN.md`.
+- Phase 8: `docs/phase-reports/PHASE_8_PLAN.md`
+- Phase 12 work will be documented in `docs/phase-reports/PHASE_12_PLAN.md`.
