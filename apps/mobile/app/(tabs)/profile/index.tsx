@@ -1,0 +1,1 @@
+import React from "react"; import {ScreenPlaceholder} from "@/components/ScreenPlaceholder"; export default function ProfileScreen(){return <ScreenPlaceholder title="Profile" description="Account details, favorites, messages, and settings are wired up starting Phase 2 (Auth & Profiles)."/>}
