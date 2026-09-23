@@ -36,10 +36,11 @@ on public.consultations for insert to authenticated
 with check ((select auth.uid())=requester_id);
 
 drop policy if exists "Participants can update consultation" on public.consultations;
-create policy "Participants can update consultation"
+drop policy if exists "Assigned consultants can update consultation" on public.consultations;
+create policy "Assigned consultants can update consultation"
 on public.consultations for update to authenticated
-using ((select auth.uid())=requester_id or (select auth.uid())=consultant_id)
-with check ((select auth.uid())=requester_id or (select auth.uid())=consultant_id);
+using ((select auth.uid())=consultant_id)
+with check ((select auth.uid())=consultant_id);
 
 drop policy if exists "Participants can read consultation messages" on public.consultation_messages;
 create policy "Participants can read consultation messages"
