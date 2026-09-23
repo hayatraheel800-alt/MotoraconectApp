@@ -12,13 +12,15 @@ export const APP_NAME = "Motoraconect";
 export const APP_TAGLINE = "BUY. SELL. VERIFY. IMPORT. UNDERSTAND.";
 export const INITIAL_CURRENCIES = ["PKR", "USD", "JPY", "AED", "EUR", "GBP"] as const;
 export const PRIMARY_NAV_TABS = ["HOME", "VEHICLES", "SELL", "SERVICES", "PROFILE"] as const;
+export {getMessages,LOCALE_LABELS,SUPPORTED_LOCALES,type SupportedLocale} from "./locales";
+
 export const FEATURE_FLAGS = {
-  AUCTION_SHEET_READER: false,
-  IMPORT_CALCULATOR: false,
+  AUCTION_SHEET_READER: true,
+  IMPORT_CALCULATOR: true,
   ASK_MOTORACONECT_AI: false,
-  MESSAGING: false,
-  CONSULTATION: false,
-  PAYMENTS: false,
-  DEALER_PLATFORM: false,
-  PARTS_MARKETPLACE: false,
+  MESSAGING: true,
+  CONSULTATION: true,
+  PAYMENTS: true,
+  DEALER_PLATFORM: true,
+  PARTS_MARKETPLACE: true,
 } as const;
