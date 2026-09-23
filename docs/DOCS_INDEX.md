@@ -11,7 +11,11 @@ Use this page as the first stop when deciding which document to read.
 | docs/architecture/CURRENT_ARCHITECTURE.md | Living implementation snapshot |
 | docs/decisions/DECISIONS.md | Decisions, assumptions, unresolved choices |
 | docs/phase-reports/PHASE_1_REPORT.md | Phase 1 source/status |
-| docs/phase-reports/PHASE_2_STATUS.md | Current Phase 2 status |
+| docs/phase-reports/PHASE_2_STATUS.md | Phase 2 verification record |
+| docs/phase-reports/PHASE_3_STATUS.md | Current Phase 3 status |
+| docs/database/PHASE_3_VEHICLE_SCHEMA.md | Vehicle schema, lifecycle, search, storage |
+| docs/api/PHASE_3_VEHICLE_API.md | Shared vehicle service contract |
+| docs/security/PHASE_3_VEHICLE_RLS.md | Vehicle and Storage authorization matrix |
 
 ## Planned reference areas
 
@@ -33,8 +37,6 @@ Use this page as the first stop when deciding which document to read.
 7. Update stale docs in the same milestone as the code change.
 
 ## Future high-value docs
-
-Before Phase 3: database schema reference, vehicle product spec, vehicle RLS matrix, vehicle API contract, storage policy plan.
 
 Before Phase 4: auction report schema, AI interface contract, confidence/provenance rules, test fixtures.
 
