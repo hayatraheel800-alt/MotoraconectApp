@@ -1,0 +1,1 @@
+import React from "react"; import {ScreenPlaceholder} from "@/components/ScreenPlaceholder"; export default function VehiclesScreen(){return <ScreenPlaceholder title="Vehicles" description="Vehicle search, filters, and listings are built in Phase 3 (Vehicle Marketplace)."/>}
