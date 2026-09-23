@@ -19,6 +19,9 @@ Last updated: 2026-09-23
 - Vehicle RLS test file added for pgTAP execution.
 - Supabase Auth Google OAuth client flow added to the mobile login screen.
 - Expo deep-link/browser support added for the native OAuth callback.
+- Vehicle photo picker added with multi-select support, client-side MIME/size validation, and private Storage upload.
+- Vehicle image upload service now stores objects under the vehicle UUID and creates the corresponding `vehicle_images` record.
+- Photo upload is available from the vehicle draft editor.
 
 ## Verification
 
@@ -28,6 +31,7 @@ Last updated: 2026-09-23
 
 ## Remaining Phase 3 work
 
+- CI/typecheck verification for the photo-upload milestone is pending completion of the current GitHub Actions runs.
 - Real device/emulator runtime verification.
 - Photo picker/upload UI and signed-image display.
 - Guided multi-step listing flow.
