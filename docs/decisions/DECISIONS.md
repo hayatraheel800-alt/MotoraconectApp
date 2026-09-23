@@ -13,6 +13,7 @@ Last updated: 2026-09-23
 | Database | Supabase Postgres |
 | Authorization | Supabase RLS + separate roles |
 | Development method | Phased implementation with verification and incremental commits |
+| Authentication | Supabase Auth remains the primary identity system; Google Sign-In is integrated through Supabase Auth |
 
 ## Still unresolved
 
@@ -24,6 +25,11 @@ Last updated: 2026-09-23
 6. Initial launch countries.
 7. Production domain and deployment topology.
 8. Open-source/proprietary license.
+9. Google OAuth client configuration in Google Cloud/Supabase Auth Providers.
+
+## Authentication note
+
+The Firebase project `motoraconnectapp` is not the primary authentication system for Motoraconect. The selected architecture is Supabase Auth + Google Sign-In. A Firebase project ID entered under Supabase Third-Party Auth configures Firebase Auth as an additional third-party authentication path; it is not the same thing as enabling Google as a Supabase Auth provider. For the selected architecture, Google OAuth credentials should be configured under Supabase Authentication → Providers → Google. Do not put Google client secrets or Firebase service credentials in the mobile app.
 
 ## Rule
 
