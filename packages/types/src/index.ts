@@ -11,4 +11,5 @@ export type { Database } from "./database";\nexport * from "./auction";
 export * from "./import";
 export * from "./chat";
 export * from "./consultation";
-export * from "./payments";\n
+export * from "./payments";
+export * from "./ai-chat";\n
