@@ -5,6 +5,7 @@ import {createClient} from "@/lib/supabase/server";
 type Metric={label:string;value:number};
 type VehicleRow={id:string;title:string;status:string;created_at:string;seller_id:string};
 type ConsultationRow={id:string;subject:string;service_type:string;status:string;created_at:string};
+type DealerRow={id:string;business_name:string;status:string;city:string|null;created_at:string};
 
 async function isAdmin(supabase:any,userId:string){
   const {data,error}=await supabase.from("user_roles").select("roles!inner(name)").eq("user_id",userId);
@@ -28,6 +29,22 @@ export default async function AdminHome(){
 
   const {data:pendingRows}=await supabase.from("vehicles").select("id,title,status,created_at,seller_id").eq("status","PENDING_REVIEW").order("created_at",{ascending:true}).limit(25);
   const {data:consultationRows}=await supabase.from("consultations").select("id,subject,service_type,status,created_at").in("status",["REQUESTED","ACCEPTED","SCHEDULED","IN_PROGRESS"]).order("created_at",{ascending:false}).limit(25);
+  const {data:pendingDealers}=await supabase.from("dealers").select("id,business_name,status,city,created_at").eq("status","PENDING_REVIEW").order("created_at",{ascending:true}).limit(25);
+
+  async function moderateDealer(formData:FormData){
+    "use server";
+    const id=String(formData.get("id")??"");
+    const status=String(formData.get("status")??"");
+    if(!id||!["ACTIVE","REJECTED","SUSPENDED"].includes(status))return;
+    const client=await createClient();
+    const {data:claimsData}=await client.auth.getClaims();
+    const actorId=typeof claimsData?.claims?.sub==="string"?claimsData.claims.sub:null;
+    if(!actorId||(await isAdmin(client,actorId))===false)return;
+    const {error:updateError}=await client.from("dealers").update({status,updated_at:new Date().toISOString()}).eq("id",id);
+    if(updateError)return;
+    await client.from("admin_actions").insert({actor_id:actorId,action_type:"DEALER_STATUS_CHANGED",entity_type:"dealers",entity_id:id,metadata:{status}});
+    await client.from("audit_logs").insert({actor_id:actorId,action:"DEALER_STATUS_CHANGED",entity_type:"dealers",entity_id:id,metadata:{status}});
+  }
 
   async function moderateVehicle(formData:FormData){
     "use server";
@@ -57,6 +74,10 @@ export default async function AdminHome(){
     <section style={{background:"white",padding:20,borderRadius:12,border:"1px solid #e4e7ec",marginBottom:20}}>
       <h2>Vehicle moderation queue</h2>
       {!pendingRows?.length?<p>No listings awaiting review.</p>:<div style={{display:"grid",gap:10}}>{(pendingRows as VehicleRow[]).map(vehicle=><div key={vehicle.id} style={{display:"grid",gridTemplateColumns:"1fr auto",gap:10,padding:12,border:"1px solid #eaecf0",borderRadius:10}}><div><strong>{vehicle.title}</strong><div style={{fontSize:13,color:"#667085"}}>{new Date(vehicle.created_at).toLocaleString()}</div></div><form action={moderateVehicle} style={{display:"flex",gap:6}}><input type="hidden" name="id" value={vehicle.id}/><button name="status" value="ACTIVE">Approve</button><button name="status" value="REJECTED">Reject</button><button name="status" value="SUSPENDED">Suspend</button></form></div>)}</div>}
+    </section>
+    <section style={{background:"white",padding:20,borderRadius:12,border:"1px solid #e4e7ec",marginBottom:20}}>
+      <h2>Dealer approval queue</h2>
+      {!pendingDealers?.length?<p>No dealers awaiting review.</p>:<div style={{display:"grid",gap:10}}>{(pendingDealers as DealerRow[]).map(dealer=><div key={dealer.id} style={{display:"grid",gridTemplateColumns:"1fr auto",gap:10,padding:12,border:"1px solid #eaecf0",borderRadius:10}}><div><strong>{dealer.business_name}</strong><div>{dealer.city??"No city"} · {new Date(dealer.created_at).toLocaleString()}</div></div><form action={moderateDealer} style={{display:"flex",gap:6}}><input type="hidden" name="id" value={dealer.id}/><button name="status" value="ACTIVE">Approve</button><button name="status" value="REJECTED">Reject</button><button name="status" value="SUSPENDED">Suspend</button></form></div>)}</div>}
     </section>
     <section style={{background:"white",padding:20,borderRadius:12,border:"1px solid #e4e7ec"}}>
       <h2>Consultations needing attention</h2>
