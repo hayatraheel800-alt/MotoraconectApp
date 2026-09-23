@@ -1,6 +1,6 @@
 begin;
 
-select plan(12);
+select plan(11);
 
 select has_table_privilege('authenticated','public.vehicles','select,insert,update,delete');
 select has_table_privilege('authenticated','public.vehicle_images','select,insert,update,delete');
