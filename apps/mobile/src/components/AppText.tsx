@@ -1,0 +1,4 @@
+import React from "react";
+import {Text,TextProps} from "react-native"; import {useTheme} from "@/theme/ThemeProvider";
+type Variant="display"|"title"|"body"|"caption"; interface AppTextProps extends TextProps{variant?:Variant;color?:string}
+export function AppText({variant="body",color,style,...rest}:AppTextProps){const theme=useTheme();const sizeMap:Record<Variant,number>={display:theme.typography.size.display,title:theme.typography.size.xl,body:theme.typography.size.base,caption:theme.typography.size.sm};return <Text style={[{fontSize:sizeMap[variant],color:color??theme.colors.textPrimary,fontWeight:variant==="display"||variant==="title"?"700":"400"},style]} {...rest}/>}
