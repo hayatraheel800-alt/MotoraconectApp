@@ -2,51 +2,83 @@
 
 **BUY. SELL. VERIFY. IMPORT. UNDERSTAND.**
 
-An international automotive platform: vehicle marketplace, auction-sheet intelligence,
-import-cost estimation, guides, AI assistance, human consultation, and (in later phases)
-dealer tools and a parts marketplace.
+Motoraconect is an international automotive platform planned around vehicle marketplace features, auction-sheet intelligence, import-cost estimation, guides, AI assistance, human consultation, and later dealer/parts/commerce capabilities.
 
-## Status
+## Current status
 
-Phase 1 — Project Foundation. See `docs/phase-reports/PHASE_1_REPORT.md` for exactly
-what exists today and what does not. See `docs/architecture/MOTORACONECT_PHASE0_ARCHITECTURE.md`
-for the full system design.
+**Phase 2 — Auth + Profiles + Roles: IN PROGRESS**
 
-**Nothing beyond the foundation (navigation shell, design system, Supabase client wiring)
-has been built yet.** There is no live marketplace, auth flow, AI, or payments in this
-codebase — those are later phases.
+- Phase 0 architecture is preserved in docs/architecture/MOTORACONECT_PHASE0_ARCHITECTURE.md.
+- Phase 1 foundation code is in the repository.
+- Phase 2 Supabase identity tables, RLS foundations, signup trigger, role seed data, and mobile auth integration have been started.
+- Runtime verification is still required before Phase 2 can be marked complete.
+- Work is committed incrementally after meaningful changes.
 
-## Structure
+## Project infrastructure
+
+| Resource | Current setup |
+|---|---|
+| GitHub | hayatraheel800-alt/MotoraconectApp |
+| Supabase | kaxkzmrlaavgweqsfman |
+| Railway | Motoraconnect app |
+| Mobile | Expo + React Native + TypeScript + Expo Router |
+| Database | Supabase Postgres + RLS |
+| Web/Admin | Planned for later phases |
+
+## Repository structure
 
 ```
-apps/mobile      Expo + React Native + TypeScript + Expo Router (the customer-facing app)
-apps/web         (not yet created — later phase)
-apps/admin       (not yet created — Phase 12)
+apps/mobile      Expo + React Native customer app
+apps/web         Planned later
+apps/admin       Planned later
 packages/types   Shared TypeScript types
-packages/config  Shared constants (roles, statuses, currencies — reference only)
-packages/ui      Shared design tokens
-supabase/        Migrations and Edge Functions (empty until Phase 2)
-docs/            Architecture docs and per-phase completion reports
+packages/config  Shared constants and feature flags
+packages/ui      Shared design tokens/components
+supabase/        Version-controlled database migrations/functions
+docs/            Architecture, plans, decisions, and phase reports
+.github/         CI and repository automation
 ```
 
-## Getting started (mobile app)
+## Documentation
 
-Requires Node 18+, npm, and the Expo CLI (`npx expo`).
+Start with docs/MASTER_PLAN.md for the current roadmap and working rules.
+
+Use docs/DOCS_INDEX.md to find the correct reference document for architecture, database, security, deployment, decisions, and phase status.
+
+- docs/architecture/MOTORACONECT_PHASE0_ARCHITECTURE.md — original Phase 0 architecture source.
+- docs/phase-reports/PHASE_1_REPORT.md — Phase 1 source/status report.
+- docs/phase-reports/PHASE_2_STATUS.md — current Phase 2 implementation status.
+- docs/architecture/CURRENT_ARCHITECTURE.md — living architecture snapshot.
+- docs/decisions/DECISIONS.md — decisions, assumptions, and unresolved choices.
+
+## Getting started
+
+Requires Node 18+, npm, and Expo.
 
 ```bash
 npm install
 cp apps/mobile/.env.example apps/mobile/.env
-# fill in EXPO_PUBLIC_SUPABASE_URL and EXPO_PUBLIC_SUPABASE_ANON_KEY
-# (create a free project at https://supabase.com if you don't have one yet)
+# Set the Supabase URL and client-side key in your local environment.
 npm run mobile
 ```
 
-This code was written in a sandbox with no network access, so `npm install` and
-`expo start` could not be run or verified here. Run the two commands above locally
-before treating Phase 1 as done — see Known Issues in the Phase 1 report.
+Never commit .env files or Supabase secret/service-role credentials.
 
-## Contributing / working on this repo
+## Development workflow
 
-Read `docs/architecture/MOTORACONECT_PHASE0_ARCHITECTURE.md` before adding anything.
-Do not add marketplace, payment, or AI logic until the corresponding phase begins —
-see the roadmap in that document.
+plan → implement one logical piece → verify → commit → update docs → continue
+
+Do not skip phases. Do not build future-domain functionality early unless the architecture explicitly requires a prerequisite.
+
+## Security rules
+
+- Supabase RLS is an authorization boundary.
+- No secret/service-role key in client bundles.
+- Privileged operations belong in Edge Functions/server-side code.
+- User roles are stored separately from profiles.
+- New user-writable tables must enable RLS in the same migration.
+- Secrets must never be committed.
+
+## License
+
+License has not yet been selected. Do not assume an open-source license until a decision is recorded.
