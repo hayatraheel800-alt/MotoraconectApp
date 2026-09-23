@@ -17,6 +17,8 @@ Last updated: 2026-09-23
 - Mobile create-draft flow added.
 - Mobile edit-draft flow added.
 - Vehicle RLS test file added for pgTAP execution.
+- Supabase Auth Google OAuth client flow added to the mobile login screen.
+- Expo deep-link/browser support added for the native OAuth callback.
 
 ## Verification
 
