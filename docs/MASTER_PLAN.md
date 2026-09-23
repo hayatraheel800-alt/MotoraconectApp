@@ -4,9 +4,9 @@ Last updated: 2026-09-23
 
 ## Current phase
 
-**Phase 11 — Payments**
+**Phase 6 — Ask Motoraconect AI**
 
-Phase 4, Phase 5, Phase 7, Phase 8, and Phase 12 implementations are complete. Phase 11 implementation is now in progress. Comprehensive testing and acceptance verification remain intentionally deferred until the final verification/hardening phase.
+Phase 4, Phase 5, Phase 7, Phase 8, Phase 11, and Phase 12 implementations are complete. Phase 6 implementation is now in progress. Comprehensive testing and acceptance verification remain intentionally deferred until the final verification/hardening phase.
 
 ## Priority execution order
 
@@ -47,6 +47,7 @@ The phases remain numbered for architecture/history, but implementation will fol
 8. Phase 8 — Consultation
 9. Phase 9 — Parts
 10. Phase 10 — Dealers
+11. **Phase 11 — Payments** — provider-neutral payment foundation **(implemented)**
 11. Phase 11 — Payments
 12. Phase 12 — Admin and analytics
 13. Phase 13 — Internationalization
@@ -72,4 +73,5 @@ Each phase should have implementation, database/schema changes where needed, doc
 - Phase 7: `docs/phase-reports/PHASE_7_PLAN.md`
 - Phase 8: `docs/phase-reports/PHASE_8_PLAN.md`
 - Phase 12: `docs/phase-reports/PHASE_12_PLAN.md`
-- Phase 11 work will be documented in `docs/phase-reports/PHASE_11_PLAN.md`.
+- Phase 11: `docs/phase-reports/PHASE_11_PLAN.md`
+- Phase 6 work will be documented in `docs/phase-reports/PHASE_6_PLAN.md`.
