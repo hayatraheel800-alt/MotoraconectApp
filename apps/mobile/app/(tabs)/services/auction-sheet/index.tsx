@@ -32,14 +32,12 @@ export default function AuctionSheetScreen(){
     <Text style={styles.badge}>MOCKED FOR DEVELOPMENT</Text>
     <Text style={styles.body}>Upload an auction sheet image. The current analyzer is intentionally mocked until a real OCR/vision provider is selected and configured.</Text>
     <View style={styles.card}>
-      <Text style={styles.cardTitle}>What the report shows</Text>
-      <Text>• DETECTED — text/data found on the sheet</Text>
-      <Text>• INTERPRETED — normalized meaning</Text>
-      <Text>• USER_PROVIDED — supplied by you</Text>
-      <Text>• ESTIMATED — clearly marked estimates</Text>
-      <Text>• UNVERIFIED — needs confirmation</Text>
+      <Text style={styles.cardTitle}>Report fields</Text>
+      <Text>Source: DETECTED, INTERPRETED, USER_PROVIDED, ESTIMATED, UNVERIFIED</Text>
+      <Text>Confidence: HIGH, MEDIUM, LOW</Text>
     </View>
     <Button title={busy?"Uploading…":"Choose auction sheet"} disabled={busy} onPress={pickSheet}/>
+    <Button title="View report history" disabled={busy} onPress={()=>router.push("/(tabs)/services/auction-sheet/reports")}/>
   </ScrollView>;
 }
 const styles=StyleSheet.create({container:{padding:20,gap:16},title:{fontSize:28,fontWeight:"700"},badge:{alignSelf:"flex-start",backgroundColor:"#111",color:"#fff",padding:8,borderRadius:6,fontWeight:"700"},body:{fontSize:16,lineHeight:24},card:{padding:16,borderWidth:1,borderColor:"#ddd",borderRadius:12,gap:8},cardTitle:{fontSize:18,fontWeight:"700"}});
