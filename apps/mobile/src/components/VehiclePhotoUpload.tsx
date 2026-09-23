@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Alert, Pressable, StyleSheet, Text, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
+import { MediaTypeOptions } from "expo-image-picker";
 import { listVehicleImages, uploadVehicleImage } from "@motoraconect/api";
 import { supabase } from "@/lib/supabase";
 
@@ -37,7 +38,7 @@ export function VehiclePhotoUpload({ vehicleId }: { vehicleId: string }) {
     }
 
     const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ["images"],
+      mediaTypes: MediaTypeOptions.Images,
       allowsMultipleSelection: true,
       selectionLimit: 10,
       quality: 0.9,
