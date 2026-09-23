@@ -1,0 +1,1 @@
+import React from "react"; import {ScreenPlaceholder} from "@/components/ScreenPlaceholder"; export default function HomeScreen(){return <ScreenPlaceholder title="Motoraconect" description="BUY. SELL. VERIFY. IMPORT. UNDERSTAND. — search, featured vehicles, services, and guides will appear here starting Phase 3."/>}
