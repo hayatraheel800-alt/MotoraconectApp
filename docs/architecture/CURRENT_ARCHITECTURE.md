@@ -15,18 +15,24 @@ This is the living implementation snapshot. For the original planned architectur
 - RLS enabled on Phase 2 identity tables.
 - Signup trigger creates profile and default USER role.
 - Mobile signup/login/sign-out integration.
+- Phase 3 vehicle and vehicle_images tables with RLS.
+- Phase 3 private vehicle-images Storage bucket and policies.
+- Generated Supabase database types.
+- packages/api shared vehicle service layer.
+- Mobile vehicle listing, detail, create-draft, and edit-draft flows.
+- Vehicle full-text search and structured database indexes.
 
 ## Not yet implemented
 
-- Vehicle marketplace.
+- Vehicle photo picker/upload UI and signed-image presentation.
+- Seller "My Listings" management and moderation handoff.
 - Web app.
 - Admin app.
-- packages/api typed service layer.
 - AI providers/real AI calls.
 - Payments.
 - Messaging/notifications.
 - Production deployment topology.
-- Full automated test suite.
+- Full automated runtime/RLS fixture suite.
 
 ## Invariants
 
@@ -36,6 +42,7 @@ This is the living implementation snapshot. For the original planned architectur
 - Privileged operations belong in Edge Functions/server-side code.
 - User roles are separate from profile data.
 - Database migrations are version-controlled.
+- Private Storage is the default for user-uploaded marketplace media.
 
 ## Key terminology
 
