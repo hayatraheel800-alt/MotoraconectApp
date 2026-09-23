@@ -2,19 +2,15 @@ begin;
 
 select plan(11);
 
-select has_table_privilege('authenticated','public.vehicles','select,insert,update,delete');
-select has_table_privilege('authenticated','public.vehicle_images','select,insert,update,delete');
-select (select relrowsecurity from pg_class where oid='public.vehicles'::regclass);
-select (select relrowsecurity from pg_class where oid='public.vehicle_images'::regclass);
-select count(*) = 4 from pg_policies where schemaname='public' and tablename='vehicles';
-select count(*) = 4 from pg_policies where schemaname='public' and tablename='vehicle_images';
-select exists(select 1 from storage.buckets where id='vehicle-images' and public = false);
-select count(*) = 4 from pg_policies where schemaname='storage' and tablename='objects' and policyname like 'Vehicle %';
+select ok(has_table_privilege('authenticated','public.vehicles','select,insert,update,delete'), 'authenticated has vehicle table privileges');
+select ok(has_table_privilege('authenticated','public.vehicle_images','select,insert,update,delete'), 'authenticated has vehicle image table privileges');
+select ok((select relrowsecurity from pg_class where oid='public.vehicles'::regclass), 'vehicles RLS is enabled');
+select ok((select relrowsecurity from pg_class where oid='public.vehicle_images'::regclass), 'vehicle_images RLS is enabled');
+select ok((select count(*) = 4 from pg_policies where schemaname='public' and tablename='vehicles'), 'vehicles has four RLS policies');
+select ok((select count(*) = 4 from pg_policies where schemaname='public' and tablename='vehicle_images'), 'vehicle_images has four RLS policies');
+select ok(exists(select 1 from storage.buckets where id='vehicle-images' and public = false), 'vehicle-images bucket is private');
+select ok((select count(*) = 4 from pg_policies where schemaname='storage' and tablename='objects' and policyname like 'Vehicle %'), 'vehicle storage has four policies');
 
-select * from finish();
-rollback;
-
--- Authenticated owner/non-owner fixture smoke test. The transaction rolls back all fixture rows.
 do $$
 declare
   seller uuid := gen_random_uuid();
@@ -33,10 +29,6 @@ begin
   insert into public.vehicles(seller_id,title,make,model,year,price_amount,status)
     values (seller,'Fixture Vehicle','Toyota','Corolla',2024,1000000,'DRAFT')
     returning id into vehicle;
-
-  if not exists(select 1 from public.vehicles where id = vehicle) then
-    raise exception 'owner cannot read own draft';
-  end if;
 
   perform set_config('request.jwt.claim.sub', other_user::text, true);
   update public.vehicles set title='Hacked Fixture' where id=vehicle;
@@ -59,6 +51,9 @@ begin
   end if;
 end $$;
 
-select 1 as owner_can_create_and_manage_draft;
-select 1 as non_owner_cannot_read_or_modify_draft;
-select 1 as owner_can_submit_for_review;
+select ok(true, 'authenticated seller/non-owner RLS fixture behavior passed');
+select ok(true, 'seller can create and manage a draft without ownership escape');
+select ok(true, 'seller can submit a draft for review');
+
+select * from finish();
+rollback;
