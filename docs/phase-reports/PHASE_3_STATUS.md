@@ -20,6 +20,7 @@ Last updated: 2026-09-23
 - Supabase Auth Google OAuth client flow added to the mobile login screen.
 - Expo deep-link/browser support added for the native OAuth callback.
 - Vehicle photo picker added with multi-select support, client-side MIME/size validation, and private Storage upload.
+- Signed vehicle image display added to the listing detail screen using time-limited Supabase Storage signed URLs.
 - Vehicle image upload service now stores objects under the vehicle UUID and creates the corresponding `vehicle_images` record.
 - Photo upload is available from the vehicle draft editor.
 
@@ -31,7 +32,7 @@ Last updated: 2026-09-23
 
 ## Remaining Phase 3 work
 
-- CI/typecheck verification for the photo-upload milestone is pending completion of the current GitHub Actions runs.
+- CI/typecheck verification for the photo upload and signed-image milestone is pending completion of the current GitHub Actions runs.
 - Real device/emulator runtime verification.
 - Photo picker/upload UI and signed-image display.
 - Guided multi-step listing flow.
