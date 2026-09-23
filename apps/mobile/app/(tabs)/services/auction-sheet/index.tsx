@@ -15,6 +15,7 @@ export default function AuctionSheetScreen(){
     if(result.canceled||!result.assets[0]?.base64) return;
     const asset=result.assets[0];
     const base64=asset.base64;
+    if(!base64) return;
     setBusy(true);
     try{
       const report=await createAuctionReport({
