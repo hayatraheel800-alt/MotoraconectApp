@@ -27,12 +27,18 @@ export interface AuctionSheetAnalyzer {
 
 export class MockAuctionSheetAnalyzer implements AuctionSheetAnalyzer {
   async analyze(input: AuctionSheetInput): Promise<AuctionSheetReport> {
+    const mockNote = "Illustrative development data only; not extracted from the uploaded sheet.";
     return {
       schemaVersion: "1",
-      summary: `MOCKED FOR DEVELOPMENT: no real auction-sheet vision provider is configured for ${input.documentName}.`,
+      summary: `MOCKED FOR DEVELOPMENT: no real auction-sheet vision provider is configured for ${input.documentName}. Any sample vehicle values below are placeholders.`,
       items: [
         {field: "document_name", value: input.documentName, source: "USER_PROVIDED", confidence: "HIGH"},
-        {field: "analysis_status", value: "mocked", source: "UNVERIFIED", confidence: "HIGH", note: "Replace with a real vision/OCR provider only after credentials and budget are approved."},
+        {field: "analysis_status", value: "mocked", source: "UNVERIFIED", confidence: "HIGH", note: "A real OCR/vision provider has not been configured."},
+        {field: "auction_grade", value: "5", source: "UNVERIFIED", confidence: "LOW", note: mockNote},
+        {field: "mileage_km", value: 68000, source: "UNVERIFIED", confidence: "LOW", note: mockNote},
+        {field: "model_year", value: 2021, source: "UNVERIFIED", confidence: "LOW", note: mockNote},
+        {field: "chassis_number", value: "MOCK-CHASSIS", source: "UNVERIFIED", confidence: "LOW", note: mockNote},
+        {field: "inspection_summary", value: "Example: cosmetic wear noted", source: "UNVERIFIED", confidence: "LOW", note: mockNote},
       ],
       mocked: true,
     };
