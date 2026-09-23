@@ -23,6 +23,7 @@ Last updated: 2026-09-23
 - Signed vehicle image display added to the listing detail screen using time-limited Supabase Storage signed URLs.
 - Guided multi-step vehicle listing form added with Basics, Condition, Pricing, and Description steps and draft saving.
 - Vehicle filters UI added for make, city, price range, and year range, wired to the existing vehicle API filters.
+- Seller My Listings screen added with authenticated owner-scoped loading, status display, refresh, empty state, and edit navigation.
 - Vehicle image upload service now stores objects under the vehicle UUID and creates the corresponding `vehicle_images` record.
 - Photo upload is available from the vehicle draft editor.
 
