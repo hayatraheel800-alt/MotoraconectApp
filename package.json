@@ -20,6 +20,6 @@
     "build": "npm run build --workspace=apps/web"
   },
   "engines": {
-    "node": ">=18"
+    "node": "24.x"
   }
 }
