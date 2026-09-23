@@ -4,9 +4,9 @@ Last updated: 2026-09-23
 
 ## Current phase
 
-**Phase 13 — Internationalization**
+**Phase 14 — Hardening, Security, Performance, Compliance & Full Verification**
 
-Phase 4, Phase 5, Phase 6, Phase 7, Phase 8, Phase 9, Phase 10, Phase 11, Phase 12, and Phase 13 implementations are complete. Phase 14 final verification/hardening is now in progress. Comprehensive testing and acceptance verification remain intentionally deferred until the final verification/hardening phase.
+Phase 4, Phase 5, Phase 6, Phase 7, Phase 8, Phase 9, Phase 10, Phase 11, Phase 12, and Phase 13 implementations are complete. Phase 14 final verification/hardening is in progress. Comprehensive testing and acceptance verification remain intentionally deferred until the final verification/hardening phase.
 
 ## Priority execution order
 
@@ -26,12 +26,12 @@ The phases remain numbered for architecture/history, but implementation follows 
 7. Phase 8 — Consultation **(implemented)**
 8. Phase 6 — Ask Motoraconect AI **(implemented)**
 9. Phase 9 — Parts **(implemented)**
-10. Phase 10 — Dealers **(current)**
+10. Phase 10 — Dealers **(implemented)**
 
 ### Priority C — Scale and launch
 
-11. Phase 13 — Internationalization
-12. Phase 14 — Hardening, Security, Performance, Compliance & Full Verification
+11. Phase 13 — Internationalization **(implemented)**
+12. **Phase 14 — Hardening, Security, Performance, Compliance & Full Verification** **(current)**
 13. Phase 15 — Production Launch
 
 ## Full roadmap
@@ -47,7 +47,7 @@ The phases remain numbered for architecture/history, but implementation follows 
 8. Phase 8 — Consultation
 9. Phase 9 — Parts
 10. Phase 10 — Dealers **(current)**
-11. Phase 11 — Payments
+11. Phase 11 — Payments **(implemented)**
 12. Phase 12 — Admin and analytics
 13. Phase 13 — Internationalization **(implemented)**
 14. Phase 14 — Hardening, security, performance, compliance, and full verification
