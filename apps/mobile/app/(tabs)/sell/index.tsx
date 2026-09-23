@@ -34,7 +34,7 @@ export default function SellScreen() {
   }
 
   return <ScrollView contentContainerStyle={styles.container}>
-    <Text style={styles.heading}>Sell a vehicle</Text>
+    <View style={styles.headerRow}><Text style={styles.heading}>Sell a vehicle</Text><Pressable onPress={() => router.push("/(tabs)/sell/my-listings")}><Text style={styles.myListings}>My Listings</Text></Pressable></View>
     <Text style={styles.help}>Complete the listing in small steps. You can save a draft after entering the required details.</Text>
     <View style={styles.progress}>{steps.map((label, index) => <View key={label} style={styles.progressItem}><View style={[styles.dot, index <= step && styles.activeDot]} /><Text style={[styles.stepLabel, index === step && styles.activeLabel]}>{label}</Text></View>)}</View>
 
@@ -54,7 +54,7 @@ export default function SellScreen() {
   </ScrollView>;
 }
 const styles = StyleSheet.create({
-  container:{padding:20,gap:16}, heading:{fontSize:28,fontWeight:"700"}, help:{color:"#666",lineHeight:20}, progress:{flexDirection:"row",justifyContent:"space-between"},
+  container:{padding:20,gap:16}, heading:{fontSize:28,fontWeight:"700"},headerRow:{flexDirection:"row",justifyContent:"space-between",alignItems:"center"},myListings:{fontWeight:"700"}, help:{color:"#666",lineHeight:20}, progress:{flexDirection:"row",justifyContent:"space-between"},
   progressItem:{alignItems:"center",gap:5}, dot:{width:12,height:12,borderRadius:6,backgroundColor:"#ccc"}, activeDot:{backgroundColor:"#111"}, stepLabel:{color:"#777",fontSize:12}, activeLabel:{color:"#111",fontWeight:"700"},
   section:{gap:12}, sectionTitle:{fontSize:20,fontWeight:"700"}, input:{borderWidth:1,borderColor:"#ccc",borderRadius:12,padding:12}, textarea:{minHeight:150,textAlignVertical:"top"},
   actions:{flexDirection:"row",gap:10}, secondary:{flex:1,padding:14,borderRadius:12,borderWidth:1,borderColor:"#ccc",alignItems:"center"}, secondaryText:{fontWeight:"700"},
