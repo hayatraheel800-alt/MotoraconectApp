@@ -52,6 +52,11 @@ create policy "Users can create conversations"
 on public.conversations for insert to authenticated
 with check ((select auth.uid())=created_by);
 
+drop policy if exists "Conversation creators can delete conversations" on public.conversations;
+create policy "Conversation creators can delete conversations"
+on public.conversations for delete to authenticated
+using ((select auth.uid())=created_by);
+
 drop policy if exists "Participants can update conversations" on public.conversations;
 create policy "Participants can update conversations"
 on public.conversations for update to authenticated
@@ -133,6 +138,25 @@ drop trigger if exists messages_create_notification on public.messages;
 create trigger messages_create_notification
 after insert on public.messages
 for each row execute function private.notify_message_recipient();
+
+create or replace function private.touch_conversation_on_message()
+returns trigger
+language plpgsql
+security definer
+set search_path = public, pg_temp
+as $
+begin
+  update public.conversations set updated_at=now() where id=new.conversation_id;
+  return new;
+end;
+$;
+
+revoke all on function private.touch_conversation_on_message() from public;
+
+drop trigger if exists messages_touch_conversation on public.messages;
+create trigger messages_touch_conversation
+after insert on public.messages
+for each row execute function private.touch_conversation_on_message();
 
 do $$
 begin
