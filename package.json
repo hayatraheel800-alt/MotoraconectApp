@@ -13,7 +13,10 @@
     "lint": "npm run lint --workspaces --if-present",
     "web": "npm run dev --workspace=apps/web",
     "web:build": "npm run build --workspace=apps/web",
-    "web:typecheck": "npm run typecheck --workspace=apps/web"
+    "web:typecheck": "npm run typecheck --workspace=apps/web",
+    "admin": "npm run dev --workspace=apps/admin",
+    "admin:build": "npm run build --workspace=apps/admin",
+    "admin:typecheck": "npm run typecheck --workspace=apps/admin"
   },
   "engines": {
     "node": ">=18"
