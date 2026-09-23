@@ -4,9 +4,9 @@ Last updated: 2026-09-23
 
 ## Current phase
 
-**Phase 4 — Auction Sheet Reader**
+**Phase 5 — Import Calculator & Guides**
 
-Implementation is in progress. Comprehensive testing and acceptance verification are intentionally deferred until the final verification/hardening phase.
+Phase 4 implementation is complete. Phase 5 implementation is now in progress. Comprehensive testing and acceptance verification remain intentionally deferred until the final verification/hardening phase.
 
 ## Priority execution order
 
@@ -63,6 +63,7 @@ Comprehensive automated tests, runtime verification, cross-platform checks, depl
 
 Each phase should have implementation, database/schema changes where needed, documentation, and Git commits. A phase is considered implementation-complete before moving to the next one; full-system verification happens at the end.
 
-## Phase 4 reference
+## Phase references
 
-See `docs/phase-reports/PHASE_4_PLAN.md`.
+- Phase 4: `docs/phase-reports/PHASE_4_PLAN.md`
+- Phase 5 will be documented in `docs/phase-reports/PHASE_5_PLAN.md`.
