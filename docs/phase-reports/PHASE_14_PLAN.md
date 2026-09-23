@@ -33,11 +33,7 @@ Those issues have been patched. The latest verification run must still complete 
 
 ### Supabase security
 
-The database security advisor no longer reports the exposed SECURITY DEFINER RPC. One remaining warning is that pgtap is installed in the public schema.
-
-Reference: https://supabase.com/docs/guides/database/database-linter?lint=0014_extension_in_public
-
-The pgtap warning is a test-infrastructure issue, not an application table authorization finding.
+The database security advisor is currently clean: no security lints are reported. Earlier findings were remediated by revoking execution of the exposed application SECURITY DEFINER RPC and moving pgTAP out of the public schema into the existing `extensions` schema.
 
 ### Supabase performance
 
