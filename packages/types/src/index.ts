@@ -7,11 +7,12 @@ export interface ServiceError { code: string; message: string; userMessage: stri
 export interface VehicleFilters { q?: string; make?: string; model?: string; city?: string; minPrice?: number; maxPrice?: number; minYear?: number; maxYear?: number; status?: VehicleStatus; limit?: number; offset?: number; }
 export type Vehicle = import("./database").Database["public"]["Tables"]["vehicles"]["Row"];
 export type VehicleImage = import("./database").Database["public"]["Tables"]["vehicle_images"]["Row"];
-export type { Database } from "./database";\nexport * from "./auction";
+export type { Database } from "./database";
+export * from "./auction";
 export * from "./import";
 export * from "./chat";
 export * from "./consultation";
 export * from "./payments";
 export * from "./ai-chat";
 export * from "./parts";
-export * from "./dealer";\n
+export * from "./dealer";
