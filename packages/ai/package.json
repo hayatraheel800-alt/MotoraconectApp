@@ -1,1 +1,16 @@
-{"name":"@motoraconect/ai","version":"0.1.0","private":true,"main":"src/index.ts","types":"src/index.ts","scripts":{"typecheck":"tsc --noEmit"},"dependencies":{"@motoraconect/types":"*"}}
+{
+  "name": "@motoraconect/ai",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@motoraconect/types": "*"
+  },
+  "devDependencies": {
+    "typescript": "5.9.2"
+  }
+}
