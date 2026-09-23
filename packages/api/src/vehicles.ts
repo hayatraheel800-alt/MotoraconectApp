@@ -27,6 +27,13 @@ export async function listVehicles(client: Client, filters: VehicleFilters = {})
   return error ? failure(error.code ?? "VEHICLE_LIST_FAILED", error.message) : { data: data as Vehicle[], error: null };
 }
 
+export async function listMyVehicles(client: Client, limit = 50): Promise<ServiceResult<Vehicle[]>> {
+  const { data: userData, error: userError } = await client.auth.getUser();
+  if (userError || !userData.user) return failure("AUTH_REQUIRED", userError?.message ?? "No authenticated user.", "Please sign in to view your listings.");
+  const { data, error } = await client.from("vehicles").select("*").eq("seller_id", userData.user.id).order("updated_at", { ascending: false }).limit(Math.min(Math.max(limit, 1), 50));
+  return error ? failure(error.code ?? "VEHICLE_MY_LIST_FAILED", error.message) : { data: data as Vehicle[], error: null };
+}
+
 export async function getVehicle(client: Client, id: string): Promise<ServiceResult<Vehicle>> {
   const { data, error } = await client.from("vehicles").select("*").eq("id", id).maybeSingle();
   if (error) return failure(error.code ?? "VEHICLE_GET_FAILED", error.message);
