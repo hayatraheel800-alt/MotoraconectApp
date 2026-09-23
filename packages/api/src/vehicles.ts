@@ -70,3 +70,33 @@ export async function createVehicleImageSignedUrl(client: Client, storagePath: s
   const { data, error } = await client.storage.from("vehicle-images").createSignedUrl(storagePath, expiresIn);
   return error ? failure("VEHICLE_IMAGE_URL_FAILED", error.message) : { data: data.signedUrl, error: null };
 }
+
+export async function uploadVehicleImage(
+  client: Client,
+  vehicleId: string,
+  body: ArrayBuffer,
+  contentType: string,
+  extension: string,
+  sortOrder: number,
+  altText?: string | null,
+): Promise<ServiceResult<VehicleImage>> {
+  const normalizedExtension = extension.replace(/[^a-z0-9]/gi, "").toLowerCase() || "jpg";
+  const path = `${vehicleId}/${Date.now()}-${Math.random().toString(36).slice(2, 10)}.${normalizedExtension}`;
+  const upload = await client.storage.from("vehicle-images").upload(path, body, {
+    contentType,
+    upsert: false,
+  });
+  if (upload.error) return failure("VEHICLE_IMAGE_UPLOAD_FAILED", upload.error.message, "We couldn't upload that photo.");
+
+  const record = await createVehicleImage(client, {
+    vehicle_id: vehicleId,
+    storage_path: upload.data.path,
+    sort_order: sortOrder,
+    alt_text: altText ?? null,
+  });
+  if (record.error) {
+    await client.storage.from("vehicle-images").remove([upload.data.path]);
+    return record;
+  }
+  return record;
+}
