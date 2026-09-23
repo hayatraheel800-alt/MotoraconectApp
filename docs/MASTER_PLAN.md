@@ -4,9 +4,9 @@ Last updated: 2026-09-23
 
 ## Current phase
 
-**Phase 5 — Import Calculator & Guides**
+**Phase 7 — Messaging & Notifications**
 
-Phase 4 implementation is complete. Phase 5 implementation is now in progress. Comprehensive testing and acceptance verification remain intentionally deferred until the final verification/hardening phase.
+Phase 4 and Phase 5 implementations are complete. Phase 7 implementation is now in progress. Comprehensive testing and acceptance verification remain intentionally deferred until the final verification/hardening phase.
 
 ## Priority execution order
 
@@ -63,7 +63,10 @@ Comprehensive automated tests, runtime verification, cross-platform checks, depl
 
 Each phase should have implementation, database/schema changes where needed, documentation, and Git commits. A phase is considered implementation-complete before moving to the next one; full-system verification happens at the end.
 
+6. Phase 7 — Messaging and notifications **(current)**
+
 ## Phase references
 
 - Phase 4: `docs/phase-reports/PHASE_4_PLAN.md`
-- Phase 5 will be documented in `docs/phase-reports/PHASE_5_PLAN.md`.
+- Phase 5: `docs/phase-reports/PHASE_5_PLAN.md`
+- Phase 7 work will be documented in `docs/phase-reports/PHASE_7_PLAN.md`.
