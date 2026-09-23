@@ -4,51 +4,53 @@
 
 **In progress.**
 
-Full verification is active. Phase 15 production launch will not be marked complete until the verification gates below are supported by evidence.
+Phase 14 is the final verification gate before Phase 15 production launch.
 
 ## Completed hardening work
 
-- Corrected npm workspace dependency specifiers so the repository installs with npm.
-- Normalized malformed literal \n characters in shared TypeScript exports.
-- Pinned the web/admin Next.js stack to current published versions.
-- Pinned web/admin Supabase packages to current published versions.
-- Updated CI to Node 24 because current Supabase JS no longer supports Node 20.
-- Revoked EXECUTE for the exposed public.rls_auto_enable() security-definer RPC.
-- Confirmed every public application table currently has RLS enabled.
+- Corrected npm workspace dependency specifiers.
+- Normalized malformed literal \\n characters in shared TypeScript exports.
+- Pinned the web/admin Next.js stack and Supabase packages.
+- Updated CI to Node 24.
+- Revoked EXECUTE for the exposed `public.rls_auto_enable()` security-definer RPC.
+- Confirmed all public application tables have RLS enabled.
 - Added foreign-key indexes for the main new domain tables.
-- Optimized auction report RLS policies to cache auth.uid() per policy evaluation.
+- Optimized auction report RLS policies to cache `auth.uid()` per policy evaluation.
 - Confirmed main Storage buckets are private.
-- Expanded CI to run TypeScript checks plus web/admin production builds.
+- Expanded CI to typecheck plus web/admin production builds.
+- Hardened identity, consultation, parts, dealers, and mock payment authorization rules.
 
-## Verification findings
+## Verified gates
 
-### CI
+### GitHub CI
 
-Earlier runs failed at:
-1. npm install because of workspace:*.
-2. TypeScript parsing because packages/types/src/index.ts contained literal \n characters.
-3. Third-party type incompatibilities exposed by the older TypeScript/web toolchain.
+Latest run for commit `d23333f191c47863124355501206b9fae563d6b7` completed with **success**. The CI workflow now covers installation, TypeScript checks, web build, and admin build.
 
-Those issues have been patched. The latest verification run must still complete successfully before CI is considered green.
+### Vercel
+
+The existing Vercel project has a **READY production deployment** for commit `d23333f191c47863124355501206b9fae563d6b7`.
+
+Important architecture finding: that Vercel project is the **admin application** rooted at `apps/admin`. The repository also contains the public application at `apps/web`, but a separate public-web Vercel project has not yet been provisioned.
 
 ### Supabase security
 
-The database security advisor is currently clean: no security lints are reported. Earlier findings were remediated by revoking execution of the exposed application SECURITY DEFINER RPC and moving pgTAP out of the public schema into the existing `extensions` schema.
+The database security advisor currently reports no security lints. Earlier findings were remediated by revoking execution of the exposed application SECURITY DEFINER RPC and moving pgTAP out of the public schema into the `extensions` schema.
 
 ### Supabase performance
 
-The database advisor reports remaining optimization notices, including multiple permissive policies and unused indexes. These are being treated as optimization work rather than evidence of an authorization bypass. Foreign-key indexes and the auction RLS init-plan warnings have already been addressed.
+Remaining advisor notices include multiple permissive policies and unused indexes. These are optimization findings rather than authorization-bypass findings. Foreign-key indexes and auction RLS init-plan warnings have already been addressed.
 
 ## Release gates still open
 
-- Latest CI run must pass typecheck, web build, and admin build.
-- Mobile runtime verification on an actual Expo target.
-- Browser verification of web/admin routes.
-- Comprehensive RLS/storage behavior tests across the major domains.
-- Production environment variables and deployment configuration review.
-- Final security/performance review.
-- Real AI and payment providers remain intentionally disabled until separately configured.
+- [ ] Provision/deploy the public web application separately from admin.
+- [ ] Verify production environment variables for web and admin.
+- [ ] Browser verification of public web and admin routes.
+- [ ] Mobile runtime verification on an Expo target.
+- [ ] Comprehensive RLS/storage behavior tests across major domains.
+- [ ] Final security/performance review.
+- [ ] Production operational configuration and rollback review.
+- [ ] Real AI/payment providers remain intentionally disabled until separately configured.
 
 ## Current launch posture
 
-The codebase is **not yet marked production-ready**. Phase 15 will only be advanced after the Phase 14 gates are evidenced.
+The codebase is **not yet marked production-ready**. Phase 15 can begin only after the open release gates are evidenced.
