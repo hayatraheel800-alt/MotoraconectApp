@@ -1,0 +1,1 @@
+alter extension pgtap set schema extensions;
