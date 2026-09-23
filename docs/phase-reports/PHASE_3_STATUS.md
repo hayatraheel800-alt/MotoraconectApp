@@ -1,10 +1,10 @@
 # MOTORACONECT — PHASE 3 STATUS
 
 Phase: Vehicle Marketplace
-Status: In progress
+Status: Final verification in progress
 Last updated: 2026-09-23
 
-## Completed in this milestone
+## Completed implementation
 
 - Vehicle and vehicle-image database schema applied to Supabase.
 - RLS and ownership rules applied.
@@ -12,40 +12,40 @@ Last updated: 2026-09-23
 - Full-text search foundation and structured indexes added.
 - Shared generated Supabase database types added.
 - Shared vehicle API/service package added.
-- Mobile vehicle listing/search screen added.
-- Mobile vehicle detail screen added.
-- Mobile create-draft flow added.
-- Mobile edit-draft flow added.
-- Vehicle RLS test file added for pgTAP execution.
-- Supabase Auth Google OAuth client flow added to the mobile login screen.
-- Expo deep-link/browser support added for the native OAuth callback.
-- Vehicle photo picker added with multi-select support, client-side MIME/size validation, and private Storage upload.
-- Signed vehicle image display added to the listing detail screen using time-limited Supabase Storage signed URLs.
-- Guided multi-step vehicle listing form added with Basics, Condition, Pricing, and Description steps and draft saving.
-- Vehicle filters UI added for make, city, price range, and year range, wired to the existing vehicle API filters.
-- Seller My Listings screen added with authenticated owner-scoped loading, status display, refresh, empty state, and edit navigation.
-- Draft listings can now be submitted for review from the seller edit screen; submission moves the vehicle to `PENDING_REVIEW` through the existing API service.
-- Vehicle image upload service now stores objects under the vehicle UUID and creates the corresponding `vehicle_images` record.
-- Photo upload is available from the vehicle draft editor.
+- Mobile vehicle listing/search and detail screens added.
+- Mobile create/edit draft flows added.
+- Vehicle photo picker, validation, private Storage upload, and signed-image display added.
+- Guided multi-step listing form added.
+- Vehicle filters UI added for make, city, price range, and year range.
+- Seller My Listings added with owner-scoped loading and draft deletion.
+- Draft submit-for-review action added, moving listings to `PENDING_REVIEW`.
+- Authenticated RLS fixture test coverage added to the pgTAP test file.
+- Google OAuth client flow remains configured but production URL/deep-link setup is pending real domains.
 
-## Verification
+## Verification evidence
 
-- Supabase tables, RLS state, bucket configuration, and Storage policies were read back after migration.
-- GitHub Actions typecheck passed after the mobile client typing fix.
-- API/shared-types packages have now been added to the root typecheck workflow.
+- Vehicle schema/RLS/Storage configuration was read back from the connected Supabase project.
+- Authenticated RLS behavior was smoke-tested in a transaction using temporary fixture users; the transaction was rolled back.
+- GitHub Actions passed for guided listing, vehicle filters, and My Listings.
+- Submit-for-review required a formatting fix after CI caught the initial source formatting issue; the corrected commits passed CI individually.
+- The latest seller-management and RLS-test commits are still awaiting final GitHub Actions completion.
+- Runtime/device acceptance has not been executed in this environment.
 
-## Remaining Phase 3 work
+## Remaining Phase 3 gate
 
-- CI/typecheck verification for the photo upload and signed-image milestone is pending completion of the current GitHub Actions runs.
-- Real device/emulator runtime verification.
-- Photo picker/upload UI and signed-image display.
-- Guided multi-step listing flow.
-- Filter UI beyond text search.
-- Seller "My Listings" management.
-- Submit-for-review UI and moderation handoff.
-- More complete automated RLS fixtures with authenticated test users.
-- Product/UX refinement and loading/error/empty states.
-- Final Phase 3 documentation and completion gate.
+1. Finish CI verification for the latest seller-management/RLS commits.
+2. Execute the pgTAP suite through the project test environment.
+3. Perform real Expo emulator/device verification of:
+   - authentication/session
+   - vehicle browse/search/filter
+   - create/edit draft
+   - photo picker/upload
+   - signed images
+   - My Listings
+   - submit for review
+   - seller draft management
+4. Reconcile any runtime findings.
+5. Mark Phase 3 complete only after code, database tests, runtime verification, and documentation all have evidence.
 
 ## Commit policy
 
