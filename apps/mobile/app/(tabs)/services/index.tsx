@@ -13,6 +13,7 @@ export default function ServicesScreen(){
     <Button title="Consultation" onPress={()=>router.push("/(tabs)/services/consultation")}/>
     <Button title="Payments (Development)" onPress={()=>router.push("/(tabs)/services/payments")}/>
     <Button title="Ask Motoraconect AI" onPress={()=>router.push("/(tabs)/services/ask-ai")}/>
+    <Button title="Parts Marketplace" onPress={()=>router.push("/(tabs)/services/parts")}/>
     <Button title="AI Conversation History" onPress={()=>router.push("/(tabs)/services/ask-ai-history")}/>
     <Text style={styles.muted}>Auction analysis is currently mocked. Import calculations are estimates entered by the user and are not official customs assessments.</Text>
     <Text style={styles.muted}>Ask Motoraconect AI will be added after the domain services are established.</Text>
