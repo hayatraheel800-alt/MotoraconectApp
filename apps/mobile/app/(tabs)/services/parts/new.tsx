@@ -25,10 +25,10 @@ export default function NewPartScreen(){
   async function pickPhoto(){
     const permission=await ImagePicker.requestMediaLibraryPermissionsAsync();
     if(!permission.granted){Alert.alert("Permission needed","Allow photo access to add a part image.");return;}
-    const result=await ImagePicker.launchImageLibraryAsync({mediaTypes:["images"],base64:true,quality:1});
+    const result=await ImagePicker.launchImageLibraryAsync({mediaTypes:ImagePicker.MediaTypeOptions.Images,base64:true,quality:1});
     if(result.canceled||!result.assets[0]?.base64)return;
     const asset=result.assets[0];
-    setBase64(asset.base64);setMimeType(asset.mimeType??"image/jpeg");setFileName(asset.fileName??"part.jpg");
+    setBase64(asset.base64??undefined);setMimeType(asset.mimeType??"image/jpeg");setFileName(asset.fileName??"part.jpg");
   }
 
   async function save(submit:boolean){
