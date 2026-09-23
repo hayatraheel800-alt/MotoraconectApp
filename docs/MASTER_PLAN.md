@@ -4,9 +4,9 @@ Last updated: 2026-09-23
 
 ## Current phase
 
-**Phase 12 — Admin & Analytics**
+**Phase 11 — Payments**
 
-Phase 4, Phase 5, Phase 7, and Phase 8 implementations are complete. Phase 12 implementation is now in progress. Comprehensive testing and acceptance verification remain intentionally deferred until the final verification/hardening phase.
+Phase 4, Phase 5, Phase 7, Phase 8, and Phase 12 implementations are complete. Phase 11 implementation is now in progress. Comprehensive testing and acceptance verification remain intentionally deferred until the final verification/hardening phase.
 
 ## Priority execution order
 
@@ -71,4 +71,5 @@ Each phase should have implementation, database/schema changes where needed, doc
 - Phase 5: `docs/phase-reports/PHASE_5_PLAN.md`
 - Phase 7: `docs/phase-reports/PHASE_7_PLAN.md`
 - Phase 8: `docs/phase-reports/PHASE_8_PLAN.md`
-- Phase 12 work will be documented in `docs/phase-reports/PHASE_12_PLAN.md`.
+- Phase 12: `docs/phase-reports/PHASE_12_PLAN.md`
+- Phase 11 work will be documented in `docs/phase-reports/PHASE_11_PLAN.md`.
