@@ -2,7 +2,7 @@
 
 ## Status
 
-**In progress.** Comprehensive verification is intentionally deferred to the final verification phase.
+**Implementation complete.** Comprehensive verification is intentionally deferred to the final verification phase.
 
 ## Scope
 
@@ -37,10 +37,10 @@ Confidence is one of:
 - Mobile upload flow creates a report, uploads the private document, runs the mock analyzer, persists structured items, and opens the report.
 - Report detail presents source and confidence metadata.
 
-## Deferred work
+## Post-phase work
 
 - Real OCR/vision provider selection and credentials.
-- PDF/document picker support beyond image selection.
+- Optional PDF/document picker expansion.
 - Background/asynchronous analysis for production-scale workloads.
 - Comprehensive automated, runtime, security, and cross-platform verification.
 
