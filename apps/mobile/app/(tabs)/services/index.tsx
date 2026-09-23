@@ -10,6 +10,7 @@ export default function ServicesScreen(){
     <Button title="Auction Sheet Reader" onPress={()=>router.push("/(tabs)/services/auction-sheet")}/>
     <Button title="Import Cost Calculator" onPress={()=>router.push("/(tabs)/services/import-calculator")}/>
     <Button title="Import & Buying Guides" onPress={()=>router.push("/(tabs)/services/guides")}/>
+    <Button title="Consultation" onPress={()=>router.push("/(tabs)/services/consultation")}/>
     <Text style={styles.muted}>Auction analysis is currently mocked. Import calculations are estimates entered by the user and are not official customs assessments.</Text>
     <Text style={styles.muted}>Ask Motoraconect AI will be added after the domain services are established.</Text>
   </ScrollView>;
