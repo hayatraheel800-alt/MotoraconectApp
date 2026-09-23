@@ -13,4 +13,5 @@ export * from "./chat";
 export * from "./consultation";
 export * from "./payments";
 export * from "./ai-chat";
-export * from "./parts";\n
+export * from "./parts";
+export * from "./dealer";\n
