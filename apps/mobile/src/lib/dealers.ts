@@ -42,6 +42,13 @@ export async function listMyDealerInventory(dealerId:string):Promise<DealerInven
   return (data??[]) as DealerInventory[];
 }
 
+export async function listMyVehicles(){
+  const userId=await currentUserId();
+  const {data,error}=await db.from("vehicles").select("id,title,status").eq("seller_id",userId).order("created_at",{ascending:false});
+  if(error)throw new Error(error.message);
+  return (data??[]) as {id:string;title:string;status:string}[];
+}
+
 export async function addVehicleToDealerInventory(dealerId:string,vehicleId:string):Promise<DealerInventory>{
   const {data,error}=await db.from("dealer_inventory").insert({dealer_id:dealerId,vehicle_id:vehicleId}).select("*").single();
   if(error)throw new Error(error.message);
