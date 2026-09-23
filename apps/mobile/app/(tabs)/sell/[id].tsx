@@ -1,0 +1,15 @@
+import React, {useEffect, useState} from "react";
+import {Alert, ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, TextInput} from "react-native";
+import {router, useLocalSearchParams} from "expo-router";
+import {getVehicle, updateVehicle} from "@motoraconect/api";
+import type {Vehicle} from "@motoraconect/types";
+import {supabase} from "@/lib/supabase";
+
+export default function EditVehicleScreen(){
+  const {id}=useLocalSearchParams<{id:string}>(); const [vehicle,setVehicle]=useState<Vehicle|null>(null); const [saving,setSaving]=useState(false);
+  useEffect(()=>{if(id)getVehicle(supabase,id).then(r=>{if(!r.error)setVehicle(r.data);else Alert.alert("Unable to load",r.error.userMessage);});},[id]);
+  if(!vehicle)return <ActivityIndicator style={{flex:1}}/>;
+  const save=async()=>{setSaving(true);const result=await updateVehicle(supabase,vehicle.id,{title:vehicle.title,make:vehicle.make,model:vehicle.model,variant:vehicle.variant,year:vehicle.year,mileage_km:vehicle.mileage_km,price_amount:vehicle.price_amount,city:vehicle.city,description:vehicle.description});setSaving(false);if(result.error)Alert.alert("Could not update",result.error.userMessage);else{Alert.alert("Saved","Draft updated.");router.back();}};
+  return <ScrollView contentContainerStyle={styles.container}><Text style={styles.heading}>Edit listing</Text><TextInput value={vehicle.title} onChangeText={title=>setVehicle({...vehicle,title})} style={styles.input}/><TextInput value={vehicle.make} onChangeText={make=>setVehicle({...vehicle,make})} style={styles.input}/><TextInput value={vehicle.model} onChangeText={model=>setVehicle({...vehicle,model})} style={styles.input}/><TextInput value={String(vehicle.year)} onChangeText={v=>setVehicle({...vehicle,year:Number(v)||0})} keyboardType="number-pad" style={styles.input}/><TextInput value={String(vehicle.price_amount)} onChangeText={v=>setVehicle({...vehicle,price_amount:Number(v)||0})} keyboardType="decimal-pad" style={styles.input}/><TextInput value={vehicle.city ?? ""} onChangeText={city=>setVehicle({...vehicle,city:city||null})} style={styles.input}/><TextInput value={vehicle.description ?? ""} onChangeText={description=>setVehicle({...vehicle,description:description||null})} multiline style={[styles.input,{minHeight:110,textAlignVertical:"top"}]}/><Pressable disabled={saving} style={styles.button} onPress={save}><Text style={styles.buttonText}>{saving?"Saving...":"Save changes"}</Text></Pressable></ScrollView>;
+}
+const styles=StyleSheet.create({container:{padding:20,gap:12},heading:{fontSize:28,fontWeight:"700"},input:{borderWidth:1,borderColor:"#ccc",borderRadius:12,padding:12},button:{padding:14,borderRadius:12,backgroundColor:"#111",alignItems:"center"},buttonText:{color:"#fff",fontWeight:"700"}});
